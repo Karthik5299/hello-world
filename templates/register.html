@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <style>
+        /* Reset default browser styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .error {
+            background-color: #ffcccc;
+            color: #ff0000;
+        }
+
+        .success {
+            background-color: #ccffcc;
+            color: #008000;
+        }
+
+        .default {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        a {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<h1>User Registration</h1>
+{% with messages = get_flashed_messages() %} {% if messages %}
+<ul>
+{% for message in messages %}
+<li class="{% if 'error' in message %}error{% elif 'success' in message %}success{% else %}default{% endif %}">
+{{ message }}
+</li>
+{% endfor %}
+</ul>
+{% endif %} {% endwith %}
+
+<form method="post" action="{{ url_for('register') }}">
+<label for="username" class="username_label">Username:</label>
+<input type="text" name="username" class="username" required />
+<br />
+<label for="password" class="password_label">Password:</label>
+<input type="password" name="password" class="password" required />
+<br />
+<input type="submit" class="register_button" value="Register" />
+</form>
+<p>
+Already have an account?
+<a href="{{ url_for('login') }}">Log in here</a>.
+</p>
+</div>
+</body>
+</html>
